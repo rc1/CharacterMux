@@ -1,0 +1,40 @@
+:root {
+  --gray-1: #EEE;
+  --gray-2: #888;
+  --gray-3: #000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Menlo, Monaco, 'Courier New', monospace;
+
+  font-family: Menlo;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--gray-1);
+}
+
+.gray-2 {
+  color: var(--gray-2);
+}
+
+.gray-3 {
+  color: var(--gray-3);
+}
+
+.underline {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-skip-ink: auto;
+  text-decoration-color: var(--gray-2);
+  text-decoration-thickness: auto;
+  text-underline-offset: 15%;
+  text-underline-position: from-font;
+}

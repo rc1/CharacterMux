@@ -1,0 +1,10 @@
+.header-bar {
+  display: flex;
+  flex-direction: row;
+
+  .divider {
+    flex-grow: 1;
+    height: 0.875rem;
+    border-bottom: 1px dotted var(--gray-2);
+  }
+}

@@ -1,0 +1,36 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 2.5rem);
+  height: calc(100vh - 2.5rem);
+  padding: 1.25rem;
+}
+
+.cell-grid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.app-footer {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+
+  &>div {
+    display: flex;
+    justify-content: center;
+  }
+
+  &>div:first-child {
+    justify-content: flex-start;
+  }
+
+  &>div:last-child {
+    justify-content: flex-end;
+    gap: 1.25rem;
+  }
+}
