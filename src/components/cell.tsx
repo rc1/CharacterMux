@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useTemporal } from "../lib/use-temporal";
 import { useCellProcessor } from "../services/cell-rewriter";
@@ -23,6 +23,38 @@ export default function Cell({ id }: { id: number }) {
 
   // Are we on a touch device and should show a copy button
   const isTouchDevice = navigator.maxTouchPoints > 0;
+
+  // Reference to the textarea element
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const touchHeaderTitle = useMemo(() => {
+    if (!isTouchDevice) {
+      return null;
+    }
+    return (
+      <div className="title touch-header-title">
+        <div
+          onClick={() => {
+            if (textareaRef.current) {
+              textareaRef.current.focus();
+              textareaRef.current.select();
+            }
+          }}
+        >
+          select all
+        </div>
+        |
+        <div
+          onClick={() => {
+            setCopied(true, 2333);
+            navigator.clipboard.writeText(text);
+          }}
+        >
+          copy
+        </div>
+      </div>
+    );
+  }, [isTouchDevice]);
 
   // Handle keyboard shortcut for copying cell content
   useEffect(() => {
@@ -49,6 +81,7 @@ export default function Cell({ id }: { id: number }) {
 
   const normalContent = () => (
     <textarea
+      ref={textareaRef}
       key="normal"
       value={text}
       onChange={(e) => updateText(e.target.value)}
@@ -80,14 +113,7 @@ export default function Cell({ id }: { id: number }) {
           ) : hasCopied ? (
             <div className="title">copied</div>
           ) : (
-            isTouchDevice && (
-              <div
-                className="title"
-                onClick={() => navigator.clipboard.writeText(text)}
-              >
-                copy
-              </div>
-            )
+            touchHeaderTitle
           )
         }
         end={

@@ -1,9 +1,18 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  width: calc(100vw - 2.5rem);
-  min-height: calc(100vh - 2.5rem);
-  padding: 1.25rem;
+  width: calc(100vw - 1.25rem);
+  min-height: calc(100vh - 1.25rem);
+  padding: 0.625rem;
+}
+
+/* Restore normal padding for tablet and above */
+@media (min-width: 768px) {
+  .app-container {
+    width: calc(100vw - 2.5rem);
+    min-height: calc(100vh - 2.5rem);
+    padding: 1.25rem;
+  }
 }
 
 .cell-grid {
