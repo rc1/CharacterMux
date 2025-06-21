@@ -9,9 +9,27 @@
 .cell-grid {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 1.25rem;
+  
+  /* Mobile: 1 column x 6 rows */
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 1fr);
+}
+
+/* Tablet: 2 columns x 3 rows */
+@media (min-width: 768px) {
+  .cell-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
+
+/* Desktop: 3 columns x 2 rows */
+@media (min-width: 1024px) {
+  .cell-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
 }
 
 .app-footer {
