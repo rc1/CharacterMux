@@ -4,6 +4,9 @@ import { useCellProcessor } from "../services/text-processor";
 import { useCell } from "../store/store";
 import "./cell.css";
 import CellHeader from "./header-bar";
+import Close from "./icons/close";
+import More from "./icons/more";
+import Spin from "./icons/spin";
 
 export default function Cell({ id }: { id: number }) {
   // This needs a better name but its
@@ -45,11 +48,15 @@ export default function Cell({ id }: { id: number }) {
         end={
           isSetup ? (
             <div className="control" onClick={() => setIsSetup(false)}>
-              x
+              <Close />
             </div>
           ) : (
             <div className="control" onClick={() => setIsSetup(true)}>
-              {cellState.type === "requesting" ? "loading..." : "s"}
+              {cellState.type === "requesting" ? (
+                <Spin className="spin" />
+              ) : (
+                <More />
+              )}
             </div>
           )
         }

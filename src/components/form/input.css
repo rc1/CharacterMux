@@ -1,0 +1,17 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    all: unset;
+    display: inline-block;
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid var(--gray-2);
+  }
+}

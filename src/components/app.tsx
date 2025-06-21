@@ -34,10 +34,10 @@ export default function App() {
             {!geminiApiKey && "!! Error: Add an valid API Key in setup !!"}
           </div>
           <div>
-            <div className="underline" onClick={() => setShowSetup(true)}>
+            <div className="button-like" onClick={() => setShowSetup(true)}>
               setup
             </div>
-            <div className="underline">help</div>
+            <div className="button-like">help</div>
           </div>
         </div>
       </div>

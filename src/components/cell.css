@@ -18,23 +18,4 @@
       line-height: 1.25rem;
     }
   }
-
-  .number {
-    width: 1.125rem;
-    text-align: center;
-  }
-
-  .control {
-    width: 1.125rem;
-    text-align: center;
-    cursor: pointer;
-  }
-
-  .title {
-    padding: 0 0.375rem 0rem 0.375rem;
-  }
-
-  .number, .title, .control {
-    color: var(--gray-2);
-  }
 }

@@ -38,3 +38,60 @@ body {
   text-underline-offset: 15%;
   text-underline-position: from-font;
 }
+
+.spin {
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.secondary {
+  color: var(--gray-2);
+}
+
+.button-like {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-image: repeating-linear-gradient(to right,
+        var(--gray-2) 0 2px,
+        transparent 2px 4px);
+    background-size: 4px 100%;
+  }
+
+  &:hover {
+
+    &::after {
+      animation: moveDots 0.5s linear infinite;
+      background-image: repeating-linear-gradient(to right,
+          var(--gray-3) 0 2px,
+          transparent 2px 4px);
+    }
+  }
+}
+
+@keyframes moveDots {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -4px 0;
+  }
+}
