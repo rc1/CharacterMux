@@ -14,4 +14,8 @@
     margin: 0;
     border-bottom: 1px solid var(--gray-2);
   }
+
+  &.focused input {
+    border-bottom: 1px solid var(--gray-3);
+  }
 }

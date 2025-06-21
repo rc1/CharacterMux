@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useState } from "react";
 
 import "./input.css";
 
@@ -13,10 +13,14 @@ export default function Input({
   inputProps: InputHTMLAttributes<HTMLInputElement>;
   label: string;
 }) {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
-    <div className="input-container">
+    <div className={`input-container ${isFocused ? "focused" : ""}`}>
       <label className="secondary">{label}</label>
       <input
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         {...inputProps}

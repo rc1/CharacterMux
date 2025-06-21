@@ -21,6 +21,20 @@ body {
   background-color: var(--gray-1);
 }
 
+h1, h2, h3, h4, h5 {
+  all: unset;
+  color: var(--gray-3);
+}
+
+p, dd {
+  color: var(--gray-2);
+}
+
+dd {
+  margin-left: 0;
+  margin-bottom: 1.125rem;
+}
+
 .gray-2 {
   color: var(--gray-2);
 }
@@ -77,12 +91,28 @@ body {
 
   &:hover {
 
+    animation: toggleItalic 0.15s steps(1, end) infinite;
+
     &::after {
       animation: moveDots 0.5s linear infinite;
       background-image: repeating-linear-gradient(to right,
           var(--gray-3) 0 2px,
           transparent 2px 4px);
     }
+  }
+}
+
+@keyframes toggleItalic {
+  0% {
+    font-style: normal;
+  }
+
+  50% {
+    font-style: italic;
+  }
+
+  100% {
+    font-style: normal;
   }
 }
 
