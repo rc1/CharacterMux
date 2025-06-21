@@ -10,7 +10,7 @@
   flex-grow: 1;
   display: grid;
   gap: 1.25rem;
-  
+
   /* Mobile: 1 column x 6 rows */
   grid-template-columns: 1fr;
   grid-template-rows: repeat(6, 1fr);

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { useTemporal } from "../lib/use-temporal";
 import { useCellProcessor } from "../services/text-processor";
 import { useCell } from "../store/store";
 import "./cell.css";
@@ -16,6 +17,35 @@ export default function Cell({ id }: { id: number }) {
   const { prompt, text, updatePrompt, updateText, setCellState, cellState } =
     useCell(id);
   const [isSetup, setIsSetup] = useState(false);
+
+  // Has copied text to clipboard
+  const [hasCopied, setCopied] = useTemporal(false);
+
+  // Handle keyboard shortcut for copying cell content
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey && e.key === String(id + 1)) {
+        e.preventDefault();
+        const textToCopy = text;
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() => {
+            setCopied(true, 2333);
+          })
+          .catch((err) => {
+            console.error("Failed to copy text: ", err);
+          });
+      }
+    };
+
+    // Add event listener
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Clean up
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [id, text]);
 
   const normalContent = () => (
     <textarea
@@ -44,7 +74,13 @@ export default function Cell({ id }: { id: number }) {
     <div className="cell">
       <CellHeader
         start={<div className="number">{id + 1}</div>}
-        center={isSetup && <div className="title">edit prompt</div>}
+        center={
+          isSetup ? (
+            <div className="title">edit prompt</div>
+          ) : (
+            hasCopied && <div className="title">copied</div>
+          )
+        }
         end={
           isSetup ? (
             <div className="control" onClick={() => setIsSetup(false)}>
