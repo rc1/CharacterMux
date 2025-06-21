@@ -3,10 +3,9 @@ import { Cell, createEmptyCell, StoreState, useStore } from "../store/store";
 export function exportSettings() {
   const store = useStore.getState();
 
-  const { geminiApiKey, cells, ...rest } = store;
+  const { cells } = store;
 
   const json = JSON.stringify({
-    ...rest,
     cells: Object.values(cells).reduce((acc, cell) => {
       acc[cell.id] = {
         id: cell.id,
@@ -22,7 +21,7 @@ export function exportSettings() {
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = "settings.json";
+  a.download = "prompts.json";
   a.click();
 
   URL.revokeObjectURL(url);

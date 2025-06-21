@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 
 import { dispatchCellUpdated } from "../services/cell-rewriter";
 import { createSelectors } from "./create-selectors";
+import defaultPrompts from "./default-prompts.json";
 
 // Types
 // =====
@@ -58,7 +59,17 @@ const useStoreBase = create<StoreState>()(
     (set, get) => ({
       geminiApiKey: "",
       intervalMilliseconds: 12000,
-      cells: {},
+
+      // Load the default settings
+      cells: Object.values(defaultPrompts.cells).reduce((acc, cell) => {
+        acc[cell.id] = {
+          id: cell.id,
+          prompt: cell.prompt,
+          state: { type: "normal" },
+          text: "",
+        };
+        return acc;
+      }, {} as Record<number, Cell>),
 
       setGeminiApiKey: (apiKey: string) => set({ geminiApiKey: apiKey }),
       setIntervalMilliseconds: (milliseconds: number) =>
