@@ -90,7 +90,6 @@ dd {
   }
 
   &:hover {
-
     animation: toggleItalic 0.15s steps(1, end) infinite;
 
     &::after {

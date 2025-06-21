@@ -21,14 +21,16 @@ export default function Cell({ id }: { id: number }) {
   // Has copied text to clipboard
   const [hasCopied, setCopied] = useTemporal(false);
 
+  // Are we on a touch device and should show a copy button
+  const isTouchDevice = navigator.maxTouchPoints > 0;
+
   // Handle keyboard shortcut for copying cell content
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.metaKey && e.key === String(id + 1)) {
         e.preventDefault();
-        const textToCopy = text;
         navigator.clipboard
-          .writeText(textToCopy)
+          .writeText(text)
           .then(() => {
             setCopied(true, 2333);
           })
@@ -75,8 +77,17 @@ export default function Cell({ id }: { id: number }) {
         center={
           isSetup ? (
             <div className="title">edit prompt</div>
+          ) : hasCopied ? (
+            <div className="title">copied</div>
           ) : (
-            hasCopied && <div className="title">copied</div>
+            isTouchDevice && (
+              <div
+                className="title"
+                onClick={() => navigator.clipboard.writeText(text)}
+              >
+                copy
+              </div>
+            )
           )
         }
         end={
