@@ -96,10 +96,10 @@ export default function Cell({ id }: { id: number }) {
         value={prompt}
         onChange={(e) => updatePrompt(e.target.value)}
       ></textarea>
-      <div className="gray-2">
+      {/* <div className="gray-2">
         Use %TEXT% in the prompt to indicate where the typed text should be
         inserted
-      </div>
+      </div> */}
     </>
   );
 

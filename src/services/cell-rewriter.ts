@@ -82,15 +82,25 @@ function createCellRewriter(cellId: number, ai: GoogleGenAI) {
         state: { type: "requesting" },
       });
 
+      let { prompt } = currentCell;
+
+      // Add the cells text, either as indicated by the user in the prompt
+      // or add to the end
+      if (prompt.indexOf("%TEXT%") > -1) {
+        prompt = prompt.replace(
+          "%TEXT%",
+          `====USERS_TEXT====\n${text}\n====END_OF_USERS_TEXT====`
+        );
+      } else {
+        prompt = `${prompt}\n\n====USERS_TEXT====\n${text}\n====END_OF_USERS_TEXT====`;
+      }
+
       const response = await ai.models.generateContent({
         model: "gemini-2.0-flash-lite",
         config: {
           systemInstruction: `You are embedded in a text editor application and are one of the worlds best, sharpest, and renowned text editors. You provide super speedy edits based on what the user is typing. Always respond without any formatting or commentary. Only ever reply with the requested edit text. You will receive instructions in the form of a prompt and the text to be edited between the markers`,
         },
-        contents: currentCell.prompt.replace(
-          "%TEXT%",
-          `====USERS_TEXT====\n${text}\n====END_OF_USERS_TEXT====`
-        ),
+        contents: prompt,
       });
 
       if (response.text && !didClear) {

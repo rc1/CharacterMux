@@ -2,27 +2,27 @@
   "cells": {
     "0": {
       "id": 0,
-      "prompt": "Fix the grammar and spelling\n\n%TEXT%"
+      "prompt": "Fix the grammar and spelling"
     },
     "1": {
       "id": 1,
-      "prompt": "Make more expressive and conciseness. Use emojis if it helps.\n\n%TEXT%"
+      "prompt": "Make more expressive and conciseness. Use emojis if it helps."
     },
     "2": {
       "id": 2,
-      "prompt": "The user has just smashed the keyboard whilst looking away from the screen, fix it\n\n%TEXT%"
+      "prompt": "The user has just smashed the keyboard whilst looking away from the screen, fix it"
     },
     "3": {
       "id": 3,
-      "prompt": "Fix spelling, grammar, and make more succinct \n\n%TEXT%"
+      "prompt": "Fix spelling, grammar, and make more succinct "
     },
     "4": {
       "id": 4,
-      "prompt": "Follow the new york times style guide and edit\n\n%TEXT%"
+      "prompt": "Follow the new york times style guide and edit"
     },
     "5": {
       "id": 5,
-      "prompt": "Rewrite with an emphasis on readability and conciseness\n\n%TEXT%"
+      "prompt": "Rewrite with an emphasis on readability and conciseness"
     }
   }
 }
