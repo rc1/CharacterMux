@@ -46,6 +46,16 @@ export default function Cell({ id }: { id: number }) {
         |
         <div
           onClick={() => {
+            navigator.clipboard.readText().then((text) => {
+              updateText(text);
+            });
+          }}
+        >
+          paste
+        </div>
+        |
+        <div
+          onClick={() => {
             setCopied(true, 2333);
             navigator.clipboard.writeText(text);
           }}
