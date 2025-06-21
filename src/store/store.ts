@@ -1,9 +1,7 @@
-import { useMemo } from "react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { debounce } from "../lib/debounce";
-import { dispatchCellUpdated } from "../services/text-processor";
+import { dispatchCellUpdated } from "../services/cell-rewriter";
 import { createSelectors } from "./create-selectors";
 
 // Types
@@ -59,7 +57,7 @@ const useStoreBase = create<StoreState>()(
   persist(
     (set, get) => ({
       geminiApiKey: "",
-      intervalMilliseconds: 1000,
+      intervalMilliseconds: 12000,
       cells: {},
 
       setGeminiApiKey: (apiKey: string) => set({ geminiApiKey: apiKey }),
@@ -74,6 +72,19 @@ const useStoreBase = create<StoreState>()(
     }),
     {
       name: "store",
+      partialize: (state) => ({
+        geminiApiKey: state.geminiApiKey,
+        intervalMilliseconds: state.intervalMilliseconds,
+        cells: Object.values(state.cells).reduce((acc, cell) => {
+          acc[cell.id] = {
+            id: cell.id,
+            prompt: cell.prompt,
+            state: { type: "normal" },
+            text: cell.text,
+          };
+          return acc;
+        }, {} as Record<number, Cell>),
+      }),
     }
   )
 );
@@ -86,17 +97,12 @@ export const useStore = createSelectors(useStoreBase);
 export function useCell(id: number) {
   const cell = useStore((state) => state.cells[id]) || createEmptyCell(id);
 
-  const debouncedDispatch = useMemo(
-    () => debounce(dispatchCellUpdated, 1000),
-    []
-  );
-
   return {
     ...cell,
     updateText: (text: string) => {
-      useStore.getState().updateCell({ ...cell, text });
-      console.log("dispatchCellUpdated");
-      debouncedDispatch(cell);
+      const nextCell = { ...cell, text };
+      useStore.getState().updateCell(nextCell);
+      dispatchCellUpdated(nextCell);
     },
     updatePrompt: (prompt: string) =>
       useStore.getState().updateCell({ ...cell, prompt }),

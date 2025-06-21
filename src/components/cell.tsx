@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useTemporal } from "../lib/use-temporal";
-import { useCellProcessor } from "../services/text-processor";
+import { useCellProcessor } from "../services/cell-rewriter";
 import { useCell } from "../store/store";
 import "./cell.css";
 import CellHeader from "./header-bar";
@@ -38,10 +38,8 @@ export default function Cell({ id }: { id: number }) {
       }
     };
 
-    // Add event listener
     document.addEventListener("keydown", handleKeyDown);
 
-    // Clean up
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };

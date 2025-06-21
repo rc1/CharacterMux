@@ -16,7 +16,9 @@ export default function App() {
 
   switch (interfaceMode) {
     case "cells": {
-      renderedContent = (
+      renderedContent = !geminiApiKey ? (
+        <Setup onShouldExit={() => setInterfaceMode("cells")} />
+      ) : (
         <div className="cell-grid">
           <Cell id={0}></Cell>
           <Cell id={1}></Cell>

@@ -55,7 +55,7 @@ export default function Help({ onShouldExit }: HelpProps) {
               On first launch, click <strong>Setup</strong> at the bottom‑right,
               paste your Gemini API key, and save. Then open the{" "}
               <strong>≡</strong> menu on each pane and enter the prompt
-              (instruction) you want that pane to follow, e.g. “Fix grammar” or
+              (instruction) you want that pane to follow, e .g. “Fix grammar” or
               “Add emojis and keep it casual.”
             </dd>
 
