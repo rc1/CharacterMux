@@ -2,6 +2,9 @@
 
 A browser-based text transformation tool that displays your writing in multiple styles simultaneously.
 
+![character-mux](https://github.com/user-attachments/assets/230759d4-0499-4cfd-bbd7-01ab720e70fd)
+
+
 ## What is CharacterMux?
 
 CharacterMux is a single-page application that displays **six text panes** side by side. Type in one pane, and the other five instantly rewrite your words based on different prompts using Google's Gemini AI. The default configuration includes:
